@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node index",
-    "dev": "nodemon index"
+    "start": "node dist/index",
+    "dev": "npx nodemon dist/index"
   },
   "keywords": [],
   "author": "",
