@@ -3,21 +3,21 @@ import { Request, Response, Router } from 'express';
 
 export class PersonController {
   private personService: PersonService;
-  private Router: Router;
+  private router: Router;
 
   constructor() {
     this.personService = new PersonService();
-    this.Router = Router();
+    this.router = Router();
     this.initializeRoutes();
   }
 
   private initializeRoutes(): void {
-    this.Router.get('/', this.findAll.bind(this));
-    this.Router.post('/', this.save.bind(this));
+    this.router.get('/', this.findAll.bind(this));
+    this.router.post('/', this.save.bind(this));
   }
 
   public getRouter(): Router {
-    return this.Router;
+    return this.router;
   }
 
   public findAll(req: Request, res: Response): void {
