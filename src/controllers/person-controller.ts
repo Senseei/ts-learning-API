@@ -5,8 +5,8 @@ export class PersonController {
   private personService: PersonService;
   private Router: Router;
 
-  constructor(personService: PersonService) {
-    this.personService = personService;
+  constructor() {
+    this.personService = new PersonService();
     this.Router = Router();
     this.initializeRoutes();
   }

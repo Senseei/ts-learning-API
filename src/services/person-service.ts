@@ -4,8 +4,8 @@ import { PersonRepository } from '../repositories/person-repository';
 export class PersonService {
     private personRepository: PersonRepository;
     
-    constructor(personRepository: PersonRepository) {
-        this.personRepository = personRepository;
+    constructor() {
+        this.personRepository = new PersonRepository();
     }
     
     public save(name: string, age: number): void {
