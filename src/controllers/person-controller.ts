@@ -1,33 +1,22 @@
 import { PersonService } from './../services/person-service';
-import { Request, Response, Router } from 'express';
+import { Request, Response } from 'express';
+import { injectable, inject } from 'tsyringe';
 
+@injectable()
 export class PersonController {
-  private personService: PersonService;
-  private router: Router;
 
-  constructor() {
-    this.personService = new PersonService();
-    this.router = Router();
-    this.initializeRoutes();
-  }
-
-  private initializeRoutes(): void {
-    this.router.get('/', this.findAll.bind(this));
-    this.router.post('/', this.save.bind(this));
-  }
-
-  public getRouter(): Router {
-    return this.router;
-  }
+  constructor(
+    @inject('PersonService') private service: PersonService
+  ) {}
 
   public findAll(req: Request, res: Response): void {
-    const persons = this.personService.findAll();
+    const persons = this.service.findAll();
     res.send(persons);
   }
 
   public save(req: Request, res: Response): void {
     const { name, age } = req.body;
-    this.personService.save(name, age);
+    this.service.save(name, age);
     res.send('Person saved successfully');
   }
 
