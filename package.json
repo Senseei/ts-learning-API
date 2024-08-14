@@ -1,12 +1,12 @@
 {
   "name": "ts-learning",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node dist/index",
-    "dev": "npx nodemon dist/index"
+    "start": "node dist/app",
+    "dev": "npx nodemon dist/app"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "ts-learning": "file:"
+    "reflect-metadata": "^0.2.2",
+    "ts-learning": "file:",
+    "tsyringe": "^4.8.0"
   }
 }
