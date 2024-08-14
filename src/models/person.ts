@@ -8,6 +8,10 @@ export class Person {
         this.age = age;
     }
 
+    public getId(): number | undefined {
+        return this.id;
+    }
+
     public getName(): string {
         return this.name;
     }
