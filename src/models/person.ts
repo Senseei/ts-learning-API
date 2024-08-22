@@ -1,6 +1,15 @@
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity()
 export class Person {
-    private id: number | undefined;
+
+    @PrimaryGeneratedColumn()
+    private id!: number;
+
+    @Column()
     private name: string;
+
+    @Column()
     private age: number;
 
     constructor(name: string, age: number) {
@@ -8,7 +17,7 @@ export class Person {
         this.age = age;
     }
 
-    public getId(): number | undefined {
+    public getId(): number {
         return this.id;
     }
 
