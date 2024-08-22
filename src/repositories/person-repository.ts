@@ -1,18 +1,21 @@
-import { Person } from '../models/person';
-import { Repository } from '../interfaces/repository';
 import { injectable } from 'tsyringe';
-
+import { Person } from '../models/person';
+import { Repository } from 'typeorm';
+import AppDataSource from '../data-source';
 
 @injectable()
-export class PersonRepository implements Repository<Person> {
-    private persons: Person[] = [];
+export class PersonRepository {
+    private repository: Repository<Person>;
 
-    public save(person: Person): void {
-        (person as any).id = this.persons.length + 1;
-        this.persons.push(person);
+    constructor() {
+        this.repository = AppDataSource.getInstance().getRepository(Person);
     }
 
-    public findAll(): Person[] {
-        return this.persons;
+    public async save(person: Person): Promise<void> {
+        await this.repository.save(person);
+    }
+
+    public async findAll(): Promise<Person[]> {
+        return await this.repository.find();
     }
 }
