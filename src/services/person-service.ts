@@ -1,23 +1,20 @@
 import { injectable, inject } from 'tsyringe';
 import { Person } from '../models/person';
-import { Repository } from '../interfaces/repository';
+import { PersonRepository } from '../repositories/person-repository';
 import { PersonDTO } from '../dtos/person/person-dto';
 
 @injectable()
 export class PersonService {
-    
-    constructor(
-        @inject('PersonRepository') private repository: Repository<Person>
-    ) {}
-    
-    public save(name: string, age: number): PersonDTO {
+    constructor(@inject('PersonRepository') private repository: PersonRepository) {}
+
+    public async save(name: string, age: number): Promise<PersonDTO> {
         const person = new Person(name, age);
-        this.repository.save(person);
+        await this.repository.save(person);
         return new PersonDTO(person);
     }
-    
-    public findAll(): PersonDTO[] {
-        const result = this.repository.findAll();
+
+    public async findAll(): Promise<PersonDTO[]> {
+        const result = await this.repository.findAll();
         return result.map(person => new PersonDTO(person));
     }
 }
