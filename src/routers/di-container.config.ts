@@ -1,5 +1,3 @@
-// src/di-container.ts
-import "reflect-metadata";
 import { container } from "tsyringe";
 import { PersonRepository } from "../repositories/person-repository";
 import { PersonService } from "../services/person-service";
@@ -11,6 +9,7 @@ export default class DIContainerConfig {
     
     public static registerOnContainer(): void {
         // Registering classes in the DI container
+        // TODO - refact this
         container.register('PersonRepository', PersonRepository);
         container.register('PersonService', PersonService);
         container.register('PersonController', PersonController);

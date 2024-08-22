@@ -1,13 +1,20 @@
-import  express from 'express';
-import router from './routers/index';
+import 'reflect-metadata';
+import express from 'express';
+import { IndexRouter } from './routers/index';
+import AppDataSource from './data-source';
+import dotenv from 'dotenv';
 
-const app = express();
-const port = 3000;
+dotenv.config();
 
-app.use(express.json());
+AppDataSource.getInstance().initialize().then(async () => {
+    const app = express();
+    const port = process.env.PORT ?? 3000;
+    const router = IndexRouter.registerRouters();
 
-app.use('/api', router);
+    app.use(express.json());
+    app.use('/api', router);
 
-app.listen(port, () => {
-    console.log(`Server started at http://localhost:${port}`);
-});
+    app.listen(port, () => {
+        console.log(`Server running on http://localhost:${port}`);
+    });
+}).catch(error => console.log(error));

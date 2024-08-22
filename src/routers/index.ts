@@ -5,11 +5,15 @@ import { container } from "tsyringe";
 import { PersonRouter } from "./person-router";
 import DIContainerConfig from "./di-container.config";
 
-DIContainerConfig.registerOnContainer();
-DIContainerConfig.registerSingletons();
+export class IndexRouter {
+    public static registerRouters(): Router {
+        DIContainerConfig.registerOnContainer();
+        DIContainerConfig.registerSingletons();
 
-const router = Router();
+        const router = Router();
 
-router.use("/persons", container.resolve(PersonRouter).getRouter());
+        router.use("/persons", container.resolve(PersonRouter).getRouter());
 
-export default router;
+        return router;
+    }
+}
